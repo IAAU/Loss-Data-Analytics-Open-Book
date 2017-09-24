@@ -1,0 +1,269 @@
+## Maximum Likelihood Theory
+
+### Likelihood Function
+
+-   Let $\mathrm{f}(\cdot;\boldsymbol\theta)$ be the probability mass
+    function if $X$ is discrete or the probability density function if
+    it is continuous.
+
+-   The likelihood is a function of the parameters
+    ($\boldsymbol \theta$) with the data ($\mathbf{x}$) fixed rather
+    than a function of the data with the parameters fixed.
+
+-   Define the *log-likelihood function*,
+    $$L(\boldsymbol \theta) = L(\mathbf{x};\boldsymbol \theta ) = \ln \mathrm{f}(\mathbf{x};\boldsymbol \theta) = \sum_{i=1}^n \ln \mathrm{f}(x_i;\boldsymbol \theta),$$
+    evaluated at a realization $\mathbf{x}$.
+
+-   In the case of independence, the joint density function can be
+    expressed as a product of the marginal density functions and, by
+    taking logarithms, we can work with sums.
+
+#### Example. Pareto Distribution
+
+-   Suppose that $X_1, \ldots, X_n$ represent a random sample from a
+    single-parameter Pareto with cumulative distribution function:
+    $$\mathrm{F}(x) = 1- \left(\frac{500}{x}\right)^{\alpha}, ~~~~ x>500 .$$
+
+-   In this case, the single parameter is $\theta = \alpha$.
+
+-   The corresponding probability density function is
+    $\mathrm{f}(x) = 500^{\alpha} \alpha x^{-\alpha-1}$ and the
+    logarithmic likelihood is
+    $$L(\boldsymbol \alpha) = \sum_{i=1}^n \ln \mathrm{f}(x_i;\alpha) = n \alpha \ln 500 +n \ln \alpha -(\alpha+1)  \sum_{i=1}^n \ln x_i .$$
+
+#### Properties of Likelihood Functions
+
+-   One basic property of likelihood functions is:
+    $$\label{E11:ScoreZero}
+    \mathrm{E} \left( \frac{ \partial}{\partial \boldsymbol \theta}
+    L(\boldsymbol \theta) \right) = \mathbf 0$$
+
+-   The derivative of the log-likelihood function,
+    $\partial L(\boldsymbol \theta)/\partial \boldsymbol \theta$, is
+    called the *score function*.
+
+-   To see this, $$\begin{aligned}
+    \mathrm{E} \left( \frac{ \partial}{\partial \boldsymbol \theta} L(\boldsymbol \theta) \right)
+    &= \mathrm{E} \left( \frac{\frac{\partial}{\partial \boldsymbol \theta}\mathrm{f}(\mathbf{x};\boldsymbol \theta)}{\mathrm{f}(\mathbf{x};\boldsymbol \theta )}  \right)
+    = \int\frac{\partial}{\partial \boldsymbol \theta} \mathrm{f}(\mathbf{x};\boldsymbol \theta ) d \mathbf y \\
+    &= \frac{\partial}{\partial \boldsymbol \theta} \int \mathrm{f}(\mathbf{x};\boldsymbol \theta ) d \mathbf y
+    = \frac{\partial}{\partial \boldsymbol \theta} 1 = \mathbf 0.\end{aligned}$$
+
+
+-   Another basic property is: $$
+    \mathrm{E} \left( \frac{ \partial^2}{\partial \boldsymbol \theta
+    \partial \boldsymbol \theta^{\prime}} L(\boldsymbol \theta) \right)
+    + \mathrm{E} \left( \frac{ \partial L(\boldsymbol \theta)}{\partial
+    \boldsymbol \theta} \frac{ \partial L(\boldsymbol \theta)}{\partial
+    \boldsymbol \theta^{\prime}}
+     \right) = \mathbf 0.$$
+
+-   With this, we can define the *information matrix*
+    $$
+    \mathbf{I}(\boldsymbol \theta) = \mathrm{E} \left( \frac{ \partial
+    L(\boldsymbol \theta)}{\partial \boldsymbol \theta} \frac{ \partial
+    L(\boldsymbol \theta)}{\partial \boldsymbol \theta^{\prime}}
+     \right) = -\mathrm{E} \left( \frac{ \partial^2}{\partial \boldsymbol \theta
+    \partial \boldsymbol \theta^{\prime}} L(\boldsymbol \theta) \right).$$
+
+-   In general
+    $$\frac{ \partial}{\partial \boldsymbol \theta} L(\boldsymbol \theta)
+    =\frac{ \partial}{\partial \boldsymbol \theta} \ln \prod_{i=1}^n
+    \mathrm{f}(x_i;\boldsymbol \theta ) =\sum_{i=1}^n \frac{
+    \partial}{\partial \boldsymbol \theta}
+    \ln \mathrm{f}(x_i;\boldsymbol \theta ).$$ has a large sample
+    **normal distribution** with mean **0** and variance
+    $\mathbf{I}(\boldsymbol \theta)$.
+
+#### Maximum Likelihood Estimators
+
+-   The value of $\boldsymbol \theta$, say $\boldsymbol \theta_{MLE}$,
+    that maximizes $\mathrm{f}(\mathbf{x};\boldsymbol \theta)$ is called
+    the *maximum likelihood estimator*.
+
+-   Maximum likelihood estimators are values of the parameters
+    $\boldsymbol \theta$ that are “most likely” to have been produced by
+    the data.
+
+-   Because $\ln(\cdot)$ is a one-to-one function, we can also determine
+    $\boldsymbol \theta_{MLE}$ by maximizing the log-likelihood
+    function, $L(\boldsymbol \theta)$.
+
+**Example. Course C/Exam 4. May 2000, 21.** You are given the following
+five observations: 521, 658, 702, 819, 1217. You use the
+single-parameter Pareto with cumulative distribution function:
+$$\mathrm{F}(x) = 1- \left(\frac{500}{x}\right)^{\alpha}, ~~~~ x>500 .$$
+Calculate the maximum likelihood estimate of the parameter $\alpha$.
+
+#### Instructor Notes
+
+**Example. Course C/Exam 4. May 2000, 21.** You are given the following
+five observations: 521, 658, 702, 819, 1217. You use the
+single-parameter Pareto with cumulative distribution function:
+$$\mathrm{F}(x) = 1- \left(\frac{500}{x}\right)^{\alpha}, ~~~~ x>500 .$$
+Calculate the maximum likelihood estimate of the parameter $\alpha$.
+
+*Solution*. With $n=5$, the logarithmic likelihood is
+$$L(\alpha ) =  \sum_{i=1}^5 \ln \mathrm{f}(x_i;\alpha ) =  5 \alpha \ln 500 + 5 \ln \alpha
+-(\alpha+1) \sum_{i=1}^5 \ln x_i.$$ Solving for the root of the score
+function yields
+$$\frac{ \partial}{\partial \alpha } L(\alpha ) =    5  \ln 500 + 5 / \alpha -  \sum_{i=1}^5 \ln x_i
+=_{set} 0 \Rightarrow \alpha_{MLE} = \frac{5}{\sum_{i=1}^5 \ln x_i - 5  \ln 500 } = 2.453 .$$
+
+#### Asymptotic Normality of Maximum Likelihood Estimators
+
+-   Under broad conditions, $\boldsymbol \theta_{MLE}$ has a large
+    sample normal distribution with mean $\boldsymbol \theta$ and
+    variance $\left( \mathbf{I}(\boldsymbol \theta) \right)^{-1}$.
+
+-   $2 \left( L(\boldsymbol \theta_{MLE}) - L(\boldsymbol \theta) \right)$
+    has a chi-square distribution with degrees of freedom equal to the
+    dimension of $\boldsymbol \theta$ .
+
+-   These are critical results upon which much of estimation and
+    hypothesis testing is based.
+
+    **Example. Course C/Exam 4. Nov 2000, 13.** A sample of ten
+    observations comes from a parametric family
+    $f(x,; \theta_1, \theta_2)$ with log-likelihood function
+    $$L(\theta_1, \theta_2)= \sum_{i=1}^{10} f(x_i; \theta_1, \theta_2) = -2.5 \theta_1^2 - 3
+    \theta_1 \theta_2 - \theta_2^2 + 5 \theta_1 + 2 \theta_2 + k,$$
+    where $k$ is a constant. Determine the estimated covariance matrix
+    of the maximum likelihood estimator, $\hat{\theta_1}, \hat{\theta_2}$.
+
+#### Instructor Notes
+
+**Example. Course C/Exam 4. Nov 2000, 13.** A sample of ten observations
+comes from a parametric family $f(x,; \theta_1, \theta_2)$ with
+log-likelihood function
+$$L(\theta_1, \theta_2)= \sum_{i=1}^{10} f(x_i; \theta_1, \theta_2) = -2.5 \theta_1^2 - 3
+\theta_1 \theta_2 - \theta_2^2 + 5 \theta_1 + 2 \theta_2 + k,$$ where
+$k$ is a constant. Determine the estimated covariance matrix of the
+maximum likelihood estimator, $\hat{\theta_1}, \hat{\theta_2}$.
+
+*Solution*. The matrix of second derivatives is $$\left(
+\begin{array}{cc}
+  \frac{ \partial ^2}{\partial \theta_1 ^2 } L & \frac{ \partial ^2}{\partial \theta_1 \partial \theta_2 } L  \\
+  \frac{ \partial ^2}{\partial \theta_1 \partial \theta_2 } L & \frac{ \partial ^2}{\partial \theta_1 ^2 } L
+\end{array} \right) =
+\left(
+\begin{array}{cc}
+  -5 & -3  \\
+  -3 & -2
+\end{array} \right)$$ Thus, the information matrix is:
+$$\mathbf{I}(\theta_1, \theta_2) = -\mathrm{E} \left( \frac{ \partial^2}{\partial \boldsymbol \theta
+\partial \boldsymbol \theta^{\prime}} L(\boldsymbol \theta) \right) = \left(
+\begin{array}{cc}
+  5 & 3  \\
+  3 & 2
+\end{array} \right)$$ and
+$$\mathbf{I}^{-1}(\theta_1, \theta_2) = \frac{1}{5(2) - 3(3)}\left(
+\begin{array}{cc}
+  2 & -3  \\
+  -3 & 5
+\end{array} \right) = \left(
+\begin{array}{cc}
+  2 & -3  \\
+  -3 & 5
+\end{array} \right) .$$
+
+#### Maximum Likelihood Estimation (MLE)
+
+-   Why use maximum likelihood estimation?
+
+    -   General purpose tool - works in many situations (data can be
+        censored, truncated, include covariates, time-dependent, and
+        so forth)
+
+    -   It is “optimal,” the best, in the sense that it has the smallest
+        variance among the class of all unbiased estimators. (Caveat:
+        for large sample sizes).
+
+-   A drawback: Generally, maximum likelihood estimators are computed
+    iteratively, no closed-form solution.
+
+    -   For example, you may recall a “Newton-Raphson” iterative
+        algorithm from calculus
+
+    -   Iterative algorithms require starting values. For some problems,
+        the choice of a close starting value is critical.
+
+#### MLE and Statistical Significance
+
+One important type inference is to say whether a parameter estimate is
+“statistically significant”
+
+-   We learned earlier that $\boldsymbol \theta_{MLE}$ has a large
+    sample normal distribution with mean $\boldsymbol \theta$ and
+    variance $\left( \mathbf{I}(\boldsymbol \theta) \right)^{-1}$.
+
+-   Look to the $j$th element of $\boldsymbol \theta_{MLE}$, say
+    $\theta_{MLE,j}$.
+
+-   Define $se(\theta_{MLE,j})$, the standard error (estimated
+    standard deviation) to be square root of the $j$ diagonal element of
+    $\left( \mathbf{I}(\boldsymbol \theta)_{MLE} \right)^{-1}$.
+
+-   To assess the hypothesis that $\theta_j$ is 0, we look at the
+    rescaled estimate
+    $t(\theta_{MLE,j})=\theta_{MLE,j}/se(\theta_{MLE,j})$. It is said to
+    be a $t$-statistic or $t$-ratio.
+
+-   Under this hypothesis, it has a $t$-distribution with degrees of
+    freedom equal to the sample size minus the dimension of
+    $\boldsymbol \theta_{MLE}$.
+
+-   For most actuarial applications, the $t$-distribution is very close
+    to the (standard) normal distribution. Thus, sometimes this ratio is
+    also known a $z$-statistic or “$z$-score.”
+
+####Assessing Statistical Significance
+
+-   If the $t$-statistic $t(\theta_{MLE,j})$ exceeds a cut-off (in
+    absolute value), then the $j$th variable is said to be
+    “statistically significant.”
+
+    -   For example, if we use a 5% significance level, then the cut-off
+        is 1.96 using a normal distribution approximation.
+
+    -   More generally, using a $100 \alpha \%$ significance level, then
+        the cut-off is a $100(1-\alpha/2)\%$ quantile from a
+        $t$-distribution using degrees of freedom equal to the sample
+        size minus the dimension of $\boldsymbol \theta_{MLE}$.
+
+-   Another useful concept in hypothesis testing is the $p$-value,
+    shorthand for probability value.
+
+    -   For a data set, a $p$-value is defined as the smallest
+        significance level for which the null hypothesis would
+        be rejected.
+
+    -   The $p$-value is a useful summary statistic for the data analyst
+        to report because it allows the reader to understand the
+        strength of the deviation from the null hypothesis.
+
+#### MLE and Model Validation
+
+Another important type inference is to select a model from two choices,
+where one choice is a subset of the other
+
+-   Suppose that we have a (large) model and determine the maximum
+    likelihood estimator, $\boldsymbol \theta_{MLE}$.
+
+-   Now assume that $p$ elements in $\boldsymbol \theta$ are equal to
+    zero and determine the maximum likelihood estimator over the
+    remaining set. Call this estimator $\boldsymbol \theta_{Reduced}$
+
+-   The statistic,
+    $LRT= 2 \left( L(\boldsymbol \theta_{MLE}) - L(\boldsymbol \theta_{Reduced}) \right)$,
+    is called the likelihood ratio (a difference of the logs is the log
+    of the ratio. Hence, the term “ratio.”)
+
+-   Under the hypothesis that the reduce model is correct, the
+    likelihood ratio has a chi-square distribution with degrees of
+    freedom equal to $p$, the number of variables set equal to zero.
+
+-   This allows us to judge which of the two models is correct. If the
+    statistic $LRT$ is large relative to the chi-square distribution,
+    then we reject the simpler, reduced, model in favor of the
+    larger one.
